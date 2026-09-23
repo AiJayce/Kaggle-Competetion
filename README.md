@@ -33,3 +33,4 @@ Each project branch contains the executed code, generated figures, benchmark sco
 | Open Problems – Multimodal Single-Cell Integration | [Github](https://github.com/AiJayce/Kaggle-Competetion/tree/Open-Problems-%E2%80%93-Multimodal-Single-Cell-Integration) |
 | IMMREP25: TCR Specificity Prediction Challenge     | [Github](https://github.com/AiJayce/Kaggle-Competetion/tree/IMMREP25-TCR-Specificity-Prediction-Challenge)              |
 
+The dependencies used across all projects are standardized and documented in the following file: [https://github.com/AiJayce/Soongsil.Univ/blob/main/DEPENDENCY.csv](https://github.com/AiJayce/Kaggle-Competetion/blob/main/DEPENDENCY.csv)
