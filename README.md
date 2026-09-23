@@ -2,7 +2,7 @@
 
 ## (1) Competetion Overview
 
-<img width="741" height="600" alt="1" src="https://github.com/user-attachments/assets/1f5d4ff3-a528-41f2-855b-101570a1a6ae" />
+<img width="741" height="600" alt="1" src="https://github.com/user-attachments/assets/5900c101-c3f9-4161-be5e-3a6bb6415955" />
 
 1. Competition Overview 
  - Hosted by Kaggle 
@@ -26,35 +26,35 @@
 
 ## (2) Model Concept
 
-<img width="838" height="683" alt="2" src="https://github.com/user-attachments/assets/fa36fd5c-dc12-464c-aa72-c30df7532bf1" />
+<img width="838" height="683" alt="2" src="https://github.com/user-attachments/assets/c1e87bd2-f747-4c20-bc75-26c9e071c81c" />
 
 On Xenium data, simple regression equations have limitations in capturing nonlinear gene expression relationships. Therefore, a PCC-based gene regulatory network is constructed from scRNA-seq reference data, and module-level regulatory equations are modeled to infer gene expression from a biologically relevant dimensional perspective.
 
 ## (3) Build GRN in scRNA-seq
 
-<img width="633" height="673" alt="3" src="https://github.com/user-attachments/assets/eb474a42-ff82-40d3-b11d-c9ce853b204c" />
+<img width="1244" height="340" alt="3" src="https://github.com/user-attachments/assets/2d9cd79f-4e86-4127-8093-f7c9c624728e" />
 
 To establish a ground truth for GRN-based gene expression inference, a PCC-based GRN was constructed from scRNA-seq data, resulting in 22 modules with distinct biological characteristics.
 
 ## (4) GRN module Characteristic
 
-<img width="808" height="673" alt="4" src="https://github.com/user-attachments/assets/36503178-cf8e-41d3-b04a-302c65df37a2" />
+<img width="808" height="673" alt="4" src="https://github.com/user-attachments/assets/7e468fc5-8d84-4de3-b622-48d6aa68d280" />
 
 To validate the applicability of the scRNA-seq-derived GRN to Xenium data, gene overlap between the two datasets was evaluated, along with whether the 22 module scores were distinctly expressed across the slide.
 
 ## (5) Gene predicting modeling
 
-<img width="673" height="673" alt="5" src="https://github.com/user-attachments/assets/5e3dfe4b-1f95-48ea-805b-71ba513e41ab" />
+<img width="1292" height="368" alt="5" src="https://github.com/user-attachments/assets/13302966-b559-4e29-9456-16c25596cf9b" />
 
 To build a regression model for predicting unobserved genes, 20% of genes were masked in the Xenium data, while the remaining 80% were used as training genes. A Ridge regression model was then constructed using module scores, and prediction accuracy was evaluated based on PCC with the ground truth.
 
-<img width="719" height="679" alt="6" src="https://github.com/user-attachments/assets/086a5e88-b948-484f-92f8-ab37638350c1" />
+<img width="1477" height="334" alt="6" src="https://github.com/user-attachments/assets/d1886f12-0ce2-405b-b9bd-028b50397739" />
 
 To estimate the accuracy of scRNA-seq-to-Xenium transfer, the expression levels of masked genes predicted by the trained regression model were compared between scRNA-seq and Xenium, and transfer accuracy was assessed using their correlation.
 
 ## (6) Spatial Niche-Smoothed Ridge
 
-<img width="760" height="325" alt="7" src="https://github.com/user-attachments/assets/ee0d8557-90cd-4b1c-a26a-4bf980afc988" />
+![Uploading 7.png…]()
 
 To capture the niche characteristics of spatial transcriptomics, a Niche Neighbor Ensemble Ridge model was developed for fine-tuning. The highest PCC was achieved with an index of 50 and 50 neighbors, resulting in an output that outperformed the first-place score.
 
