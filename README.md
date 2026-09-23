@@ -1,6 +1,6 @@
 # Kaggle Machine Learning Competetion
 
-<img width="640" height="300" alt="image" src="https://github.com/user-attachments/assets/05a51fda-fea8-4685-be29-d16347f9be48" />
+<img width="800" height="300" alt="image" src="https://github.com/user-attachments/assets/05a51fda-fea8-4685-be29-d16347f9be48" />
 
 This page presents projects related to my participation in Kaggle machine learning competitions.
 
