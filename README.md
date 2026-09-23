@@ -48,7 +48,26 @@ Generate a gene regulatory attention block using scATAC-seq enhancer peaks, prom
 An MLP was trained within a regulatory attention block to infer nonlinear gene perturbations induced by drug treatment. Residual analysis showed that the residuals for each drug converged toward zero.
 Drug response prediction for Myeloid and B cell types after fine-tuning the optimized MLP attention block showed good performance.
 
+## (5) Discussion
 
+### Data and analysis context
+
+The Kaggle Open Problems – Single-cell Perturbations competition was used to develop a deep learning model for predicting drug-induced gene expression changes at the single-cell level. The training data consisted of pre-treatment scRNA-seq and scATAC-seq single-cell multiome data from CD4+ T cells, CD8+ T cells, Regulatory T cells, NK cells, Myeloid cells, and B cells, together with post-treatment DEG data from 126 drugs in CD4+ T cells, CD8+ T cells, Regulatory T cells, and NK cells. Since post-treatment labels were not provided for Myeloid cells and B cells, drug responses for these cell types were predicted by learning perturbation patterns from the observed cell types.
+
+A gene-token-based Self-Attention architecture was implemented in PyTorch to integrate gene expression and regulatory accessibility information. Gene expression and chromatin accessibility were embedded into a regulatory representation, followed by Self-Attention to capture gene-level interactions and perturbation context. An MLP was then trained using post-treatment DEG profiles as labels. Dropout and Early Stopping were applied to control overfitting. The trained model was subsequently fine-tuned on Myeloid cells and B cells to transfer the learned representations to cell types without direct perturbation labels.
+
+### Interpretation
+
+The model integrated gene expression and regulatory information from single-cell multiome data to predict drug-induced transcriptional responses. The Self-Attention architecture captured gene-level interactions and regulatory context under perturbation, while fine-tuning enabled the learned representations from observed cell types to be transferred to Myeloid cells and B cells. This framework enabled the prediction of perturbation responses in cell types without direct post-treatment observations.
+
+### Considerations
+
+The predicted drug responses depend on the quality and distribution of the single-cell multiome data, drug-specific perturbation characteristics, and the biological similarity between the training and target cell types. Since Myeloid cells and B cells lacked direct post-treatment labels, their predicted responses represent transferred model estimates rather than directly observed perturbation effects. Independent datasets and experimental validation are required to assess the generalization and biological relevance of the predictions.
+
+### Score Benchmark
+| Competition                               | Model Score (MRRMSE) | 1st Place Score (MRRMSE) |
+| ----------------------------------------- | -------------------: | -----------------------: |
+| Open Problems – Single-cell Perturbations |            **0.826** |                **0.729** |
 
 
 
