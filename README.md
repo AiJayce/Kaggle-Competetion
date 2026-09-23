@@ -1,24 +1,55 @@
-# Kaggle Machine Learning Competetion
+<img width="103" height="49" alt="image" src="https://github.com/user-attachments/assets/1e5dc16b-e202-43c4-b48a-a6feebfd202f" /><img width="642" height="74" alt="image" src="https://github.com/user-attachments/assets/af7ff84d-20f2-450d-befe-c800e450011c" /># Open-Problems-Single-Cell-Perturbations
 
-This page presents projects related to my participation in Kaggle machine learning competitions.
+## (1) Competetion Overview
 
-My personal Kaggle profile is available at 
-https://www.kaggle.com/kimkiyeont
+<img width="743" height="680" alt="그림1" src="https://github.com/user-attachments/assets/a1343796-e68d-41ec-bf77-48d08b2247bc" />
 
-As Kaggle competitions specifically focused on bioinformatics are relatively limited, opportunities to participate in active competitions were somewhat restricted. For competitions that had already ended, I actively used the Late Submission feature to further develop my modeling skills in relevant domains.
+1. Competition Overview
+ - Hosted by Kaggle
+ - Objective: Predict how small-molecule perturbations alter gene expression across different cell types. 
+ - Experimental context: 144 compounds were applied to human PBMCs from three healthy donors, followed by 24-hour single-cell RNA-seq profiling. 
 
-Although projects submitted through Late Submission do not receive an official leaderboard ranking, I objectively evaluated model performance by comparing my results with the scores achieved by top-ranked participants. This provided an opportunity to benchmark the performance of my models against established competition results.
+2. Data & Experimental Design
+ - Perturbation data: scRNA-seq profiles after drug treatment, with differential expression (DE) calculated for each cell type × compound combination. 
+ - Multi-omics data: Baseline 10x Multiome (scRNA-seq + scATAC-seq) data were provided to capture the pre-treatment cellular and chromatin state. 
+ - Training data contained all compounds for T/NK cells but only a subset for B/Myeloid cells, creating a perturbation-response generalization problem.
 
-The table below summarizes the competitions I participated in, including the competition name, URL, whether Late Submission was used, and the submission date.
+3. Prediction Task
+ - Predict the 18,211-gene differential expression profile for unseen B-cell and Myeloid-cell × compound combinations.The task therefore evaluates whether a model can generalize drug-induced transcriptional responses to previously unmeasured cellular contexts.
 
-| Competition                                        | URL                                                                                                          | Late Submission | Date            |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | :-------------: | --------------- |
-| IMMREP25: TCR Specificity Prediction Challenge     | [Kaggle](https://www.kaggle.com/competitions/immrep25?utm_source=chatgpt.com)                                |       Yes       | 2026.08–2026.09 |
-| Open Problems – Multimodal Single-Cell Integration | [Kaggle](https://www.kaggle.com/competitions/open-problems-multimodal?utm_source=chatgpt.com)                |       Yes       | 2026.09         |
-| Open Problems – Single-Cell Perturbations          | [Kaggle](https://www.kaggle.com/competitions/open-problems-single-cell-perturbations?utm_source=chatgpt.com) |       Yes       | 2026.08         |
-| Sartorius – Cell Instance Segmentation             | [Kaggle](https://www.kaggle.com/competitions/sartorius-cell-instance-segmentation?utm_source=chatgpt.com)    |       Yes       | 2026.09         |
-| Xenium Imputation Benchmarking                     | [Kaggle](https://www.kaggle.com/competitions/imputation-benchmarking-xenium-fold-1?utm_source=chatgpt.com)   |       Yes       | 2026.09         |
+4. Evaluation
+ - Use the Mean Rowwise Root Mean Squared Error to score submissions
+
+5. My Key Concept 
+ - Integrating scRNA expression and scATAC peak information through a self-attention block enables the model to better capture cell-type-specific perturbation responses.
+
+## (2) Model Concept
+
+<img width="1001" height="681" alt="그림2" src="https://github.com/user-attachments/assets/73126408-399f-4573-b14d-b025a49cddd2" />
+
+Inferring drug-induced cellular dynamics from RNA expression alone may lack sufficient information to capture nonlinear changes. Therefore, I developed a model that incorporates promoter and enhancer information from ATAC-seq to provide additional dynamic context, enabling more accurate prediction of perturbed gene tokens.
+
+## (3) Preprocess
+
+<img width="492" height="697" alt="그림3" src="https://github.com/user-attachments/assets/bf6f6df2-7570-44dc-84a1-275ba6010eea" />
+
+Generate a gene regulatory attention block using scATAC-seq enhancer peaks, promoter accessibility, and scRNA-seq gene expression.
+
+## (4) Attention block characteristic
+
+<img width="492" height="670" alt="그림4" src="https://github.com/user-attachments/assets/c51e4449-bce5-4eca-93a1-93319fab8801" />
+
+Generate a gene regulatory attention block using scATAC-seq enhancer peaks, promoter accessibility, and scRNA-seq gene expression.
+
+## (5) Training
+
+<img width="1013" height="687" alt="그림5" src="https://github.com/user-attachments/assets/e6da7b5b-5158-4f72-ab54-58b7f26c048f" />
+
+An MLP was trained within a regulatory attention block to infer nonlinear gene perturbations induced by drug treatment. Residual analysis showed that the residuals for each drug converged toward zero.
+Drug response prediction for Myeloid and B cell types after fine-tuning the optimized MLP attention block showed good performance.
 
 
-Each project branch contains the executed code, generated figures, benchmark scores, and a summary of the project's significance and key findings.
+
+
+
 
