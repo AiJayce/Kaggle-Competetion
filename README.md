@@ -5,6 +5,7 @@
 This page presents projects related to my participation in Kaggle machine learning competitions.
 
 My personal Kaggle profile is available at 
+
 https://www.kaggle.com/kimkiyeont
 
 As Kaggle competitions specifically focused on bioinformatics are relatively limited, opportunities to participate in active competitions were somewhat restricted. For competitions that had already ended, I actively used the Late Submission feature to further develop my modeling skills in relevant domains.
