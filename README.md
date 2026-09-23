@@ -27,11 +27,11 @@ Each project branch contains the executed code, generated figures, benchmark sco
 
 | Competition                                        | Github working directory                                                                                                                                                                                                       |
 | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Xenium Imputation Benchmarking                     | (https://github.com/AiJayce/Kaggle-Competetion/tree/Xenium-Imputation-Benchmarking)                                                         |
-| Sartorius – Cell Instance Segmentation             | (https://github.com/AiJayce/Kaggle-Competetion/tree/Sartorius-%E2%80%93-Cell-Instance-Segmentation)                         |
-| Open Problems – Single-Cell Perturbations          | (https://github.com/AiJayce/Kaggle-Competetion/tree/Open-Problems-%E2%80%93-Single-Cell-Perturbations)                   |
-| Open Problems – Multimodal Single-Cell Integration | (https://github.com/AiJayce/Kaggle-Competetion/tree/Open-Problems-%E2%80%93-Multimodal-Single-Cell-Integration) |
-| IMMREP25: TCR Specificity Prediction Challenge     | (https://github.com/AiJayce/Kaggle-Competetion/tree/IMMREP25-TCR-Specificity-Prediction-Challenge)                           |
+| Xenium Imputation Benchmarking                     | https://github.com/AiJayce/Kaggle-Competetion/tree/Xenium-Imputation-Benchmarking                                                         |
+| Sartorius – Cell Instance Segmentation             | https://github.com/AiJayce/Kaggle-Competetion/tree/Sartorius-%E2%80%93-Cell-Instance-Segmentation                         |
+| Open Problems – Single-Cell Perturbations          | https://github.com/AiJayce/Kaggle-Competetion/tree/Open-Problems-%E2%80%93-Single-Cell-Perturbations                   |
+| Open Problems – Multimodal Single-Cell Integration | https://github.com/AiJayce/Kaggle-Competetion/tree/Open-Problems-%E2%80%93-Multimodal-Single-Cell-Integration |
+| IMMREP25: TCR Specificity Prediction Challenge     | https://github.com/AiJayce/Kaggle-Competetion/tree/IMMREP25-TCR-Specificity-Prediction-Challenge                           |
 
 
 The dependencies used across all projects are standardized and documented in the following file: [https://github.com/AiJayce/Soongsil.Univ/blob/main/DEPENDENCY.csv](https://github.com/AiJayce/Kaggle-Competetion/blob/main/DEPENDENCY.csv)
