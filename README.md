@@ -54,7 +54,7 @@ In 4), Attention was evenly distributed across nodes, indicating a balanced netw
 
 After splitting the training data into Train/Test sets, higher performance was observed in HLA subgroups with larger sample sizes. Nevertheless, the overall validation performance remained at an appropriate level.
 
-## (5) Discussion
+## (7) Discussion
 
 ### Data and analysis context
 
