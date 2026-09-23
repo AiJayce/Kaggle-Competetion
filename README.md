@@ -37,7 +37,7 @@ Generate a gene regulatory attention block using scATAC-seq enhancer peaks, prom
 
 ## (4) Attention block characteristic
 
-<img width="492" height="670" alt="그림4" src="https://github.com/user-attachments/assets/c51e4449-bce5-4eca-93a1-93319fab8801" />
+<img width="836" height="366" alt="그림4" src="https://github.com/user-attachments/assets/01c1ad3d-95df-427f-9147-3ebc128247ac" />
 
 Generate a gene regulatory attention block using scATAC-seq enhancer peaks, promoter accessibility, and scRNA-seq gene expression.
 
