@@ -1,24 +1,83 @@
-# Kaggle Machine Learning Competetion
+# IMMREP25: TCR Specificity Prediction Challenge
 
-This page presents projects related to my participation in Kaggle machine learning competitions.
+## (1) Competetion Overview
 
-My personal Kaggle profile is available at 
-https://www.kaggle.com/kimkiyeont
+<img width="739" height="697" alt="1" src="https://github.com/user-attachments/assets/b1aff123-0ed7-42de-95e1-f774479a8d74" />
 
-As Kaggle competitions specifically focused on bioinformatics are relatively limited, opportunities to participate in active competitions were somewhat restricted. For competitions that had already ended, I actively used the Late Submission feature to further develop my modeling skills in relevant domains.
+1. Competition Overview
+ - Hosted by Kaggle
+ - Objective: Predict whether a T-cell receptor (TCR) recognizes a specific peptide–MHC (pMHC) complex.
+ - Experimental context: Develop accurate models for predicting TCR–pMHC binding specificity from amino acid sequences.
 
-Although projects submitted through Late Submission do not receive an official leaderboard ranking, I objectively evaluated model performance by comparing my results with the scores achieved by top-ranked participants. This provided an opportunity to benchmark the performance of my models against established competition results.
+2. Data & Experimental Design
+ - TCR data: TCR α and β chain amino acid sequences, including CDR1, CDR2, CDR3, and V/J gene information.
+ - Antigen data: Peptide sequences presented by specific HLA/MHC molecules.
+ - Training data: Paired TCR–pMHC combinations with binding labels.
+ - Test data: TCR–pMHC combinations requiring binding prediction.
 
-The table below summarizes the competitions I participated in, including the competition name, URL, whether Late Submission was used, and the submission date.
+3. Prediction Task
+ - Predict the binding probability of a given TCR α/β combination to a specific peptide–MHC complex.
 
-| Competition                                        | URL                                                                                                          | Late Submission | Date            |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | :-------------: | --------------- |
-| IMMREP25: TCR Specificity Prediction Challenge     | [Kaggle](https://www.kaggle.com/competitions/immrep25?utm_source=chatgpt.com)                                |       Yes       | 2026.08–2026.09 |
-| Open Problems – Multimodal Single-Cell Integration | [Kaggle](https://www.kaggle.com/competitions/open-problems-multimodal?utm_source=chatgpt.com)                |       Yes       | 2026.09         |
-| Open Problems – Single-Cell Perturbations          | [Kaggle](https://www.kaggle.com/competitions/open-problems-single-cell-perturbations?utm_source=chatgpt.com) |       Yes       | 2026.08         |
-| Sartorius – Cell Instance Segmentation             | [Kaggle](https://www.kaggle.com/competitions/sartorius-cell-instance-segmentation?utm_source=chatgpt.com)    |       Yes       | 2026.09         |
-| Xenium Imputation Benchmarking                     | [Kaggle](https://www.kaggle.com/competitions/imputation-benchmarking-xenium-fold-1?utm_source=chatgpt.com)   |       Yes       | 2026.09         |
+4. Evaluation
+ - Submissions are evaluated using Macro AUC0.1, the mean partial AUC up to FPR 0.1 calculated independently for each peptide.
+
+5. My Key Concept
+ - A Transformer preserves contextual information across amino acid sequences and learns sequence representations to infer the structural compatibility of TCR α/β amino acid constructs and predict their pMHC binding specificity.
+
+## (2) Model Concept
+
+<img width="838" height="683" alt="2" src="https://github.com/user-attachments/assets/189afba2-8496-4361-90c5-dcb8900c5122" />
+
+TCR amino acid sequences rely heavily on positional and contextual information, which may be lost with conventional encoding. By incorporating biological context, a Transformer-based strategy was adopted to preserve these features.
+
+## (3) Preprocess
+
+<img width="633" height="673" alt="3" src="https://github.com/user-attachments/assets/3329d530-4152-4b7e-803f-cdac66a14639" />
+
+Among the VDJ chains, the CDR3α and CDR3β sequences, which have the greatest influence on recombination, were selected as learning data. 
+
+## (4) Positional encoding performance comparison & Finding the optimal learning rate
+
+<img width="922" height="676" alt="4" src="https://github.com/user-attachments/assets/2d8f173b-d6a7-4e60-9850-5ef42ade8bee" />
+
+Preserving positional information in amino acid sequences is essential. Therefore, I benchmarked two different positional encoding strategies. In 2), model training showed that ROPE achieved the best performance. However, in 3), this encoding approach showed rapid overfitting despite the small number of epochs, so the model with the best AUC was selected to determine the optimal learning rate.
+
+## (5) Attention Token Validation
+
+<img width="1120" height="343" alt="5" src="https://github.com/user-attachments/assets/48054757-ee2f-4f44-85b2-64b00bcc0e3e" />
+
+In 4), Attention was evenly distributed across nodes, indicating a balanced network. 5) Layer-wise token clustering and similarity confirmed balanced Multi-Head Attention, validating the attention modeling.
+
+## (6) Model Validation
+
+<img width="735" height="676" alt="6" src="https://github.com/user-attachments/assets/f096b14c-e557-41b5-9120-a42969e65e1c" />
+
+After splitting the training data into Train/Test sets, higher performance was observed in HLA subgroups with larger sample sizes. Nevertheless, the overall validation performance remained at an appropriate level.
+
+## (5) Discussion
+
+### Data and analysis context
+
+The IMMREP25 TCR Specificity Prediction Challenge was used to develop a Transformer-based deep learning model for predicting the binding potential of previously unobserved TCR–peptide–HLA combinations. The task involved learning from TCR CDR3α and CDR3β sequences together with peptide–HLA information and generalizing the learned antigen-specificity patterns to novel combinations.
+
+Observed TCR–peptide–HLA binding pairs were defined as positive samples, while synthetic negative samples were generated by shuffling peptides within the same HLA context. This strategy enabled the model to learn both observed binding patterns and characteristics of non-binding combinations.
+
+The model was built using a Transformer architecture with RoPE positional encoding and self-attention to capture positional information and contextual relationships within TCR and peptide sequences. A Q-K-V attention structure was specifically designed to integrate TCRα and peptide information through TCRβ, while residual connections and a masked decoder were incorporated to model sequence context and TCR–peptide interactions. The resulting TCRα, TCRβ, peptide, and HLA representations were integrated to predict binding probability.
+
+### Interpretation
+
+The Transformer-based framework effectively modeled sequence-level features and interactions between TCR and peptide–HLA components for antigen-specificity prediction. Comparison of sinusoidal positional encoding and RoPE showed that RoPE provided a more effective sequence representation for this task. The architecture demonstrated the potential of explicitly modeling cross-sequence interactions through attention mechanisms when predicting previously unobserved TCR–peptide–HLA combinations.
+
+### Considerations
+
+The generated negative samples were based on peptide shuffling within the same HLA context and may not fully represent biologically validated non-binding pairs. Prediction performance may also depend on the diversity and coverage of the observed TCR–peptide–HLA combinations in the training data. Independent datasets and experimentally validated binding assays are required to assess the generalization and biological relevance of the predicted antigen-specific interactions.
+
+### Score Benchmark
+| Competition                                   | Model Score (ROC AUC) | 1st Place Score (ROC AUC) |
+| --------------------------------------------- | --------------------: | ------------------------: |
+| IMMREP25 TCR Specificity Prediction Challenge |             **0.807** |                 **0.601** |
 
 
-Each project branch contains the executed code, generated figures, benchmark scores, and a summary of the project's significance and key findings.
+
+
 
