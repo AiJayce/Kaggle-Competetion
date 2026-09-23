@@ -54,12 +54,12 @@ To estimate the accuracy of scRNA-seq-to-Xenium transfer, the expression levels 
 
 ## (6) Spatial Niche-Smoothed Ridge
 
-![Uploading 7.png…]()
+<img width="760" height="325" alt="7" src="https://github.com/user-attachments/assets/4192e49b-d039-4853-a278-3213b5fe592c" />
 
 To capture the niche characteristics of spatial transcriptomics, a Niche Neighbor Ensemble Ridge model was developed for fine-tuning. The highest PCC was achieved with an index of 50 and 50 neighbors, resulting in an output that outperformed the first-place score.
 
 
-## (5) Discussion
+## (7) Discussion
 
 ### Data and analysis context
 
