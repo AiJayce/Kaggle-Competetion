@@ -1,4 +1,4 @@
-<img width="2353" height="35" alt="image" src="https://github.com/user-attachments/assets/c9102255-e5b1-4157-a0de-dc0e7ab8a0af" /># Open Problems – Multimodal Single-Cell Integration
+# Open Problems – Multimodal Single-Cell Integration
 
 ## (1) Competetion Overview
 
