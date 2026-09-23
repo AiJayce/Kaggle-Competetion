@@ -1,4 +1,4 @@
-<img width="103" height="49" alt="image" src="https://github.com/user-attachments/assets/1e5dc16b-e202-43c4-b48a-a6feebfd202f" /><img width="642" height="74" alt="image" src="https://github.com/user-attachments/assets/af7ff84d-20f2-450d-befe-c800e450011c" /># Open-Problems-Single-Cell-Perturbations
+# Open-Problems-Single-Cell-Perturbations
 
 ## (1) Competetion Overview
 
