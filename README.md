@@ -34,4 +34,4 @@ Each project branch contains the executed code, generated figures, benchmark sco
 | IMMREP25: TCR Specificity Prediction Challenge     | https://github.com/AiJayce/Kaggle-Competetion/tree/IMMREP25-TCR-Specificity-Prediction-Challenge                           |
 
 
-The dependencies used across all projects are standardized and documented in the following file: [https://github.com/AiJayce/Soongsil.Univ/blob/main/DEPENDENCY.csv](https://github.com/AiJayce/Kaggle-Competetion/blob/main/DEPENDENCY.csv)
+The dependencies used across all projects are standardized and documented in the following file: https://github.com/AiJayce/Kaggle-Competetion/blob/main/DEPENDENCY.csv
