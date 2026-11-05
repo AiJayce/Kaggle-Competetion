@@ -4,7 +4,7 @@
 
 This page presents projects related to my participation in Kaggle machine learning competitions.
 
-My personal Kaggle profile is available at : https://www.kaggle.com/kimkiyeont
+My personal GitHub profile is available [here](https://github.com/AiJayce).
 
 As Kaggle competitions specifically focused on bioinformatics are relatively limited, opportunities to participate in active competitions were somewhat restricted. For competitions that had already ended, I actively used the Late Submission feature to further develop my modeling skills in relevant domains.
 
@@ -12,14 +12,13 @@ Although projects submitted through Late Submission do not receive an official l
 
 The table below summarizes the competitions I participated in, including the competition name, URL, whether Late Submission was used, and the submission date.
 
-| Competition                                        | URL                                                                                                          | Late Submission | Date            |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | :-------------: | --------------- |
-| IMMREP25: TCR Specificity Prediction Challenge     | [Kaggle](https://www.kaggle.com/competitions/immrep25?utm_source=chatgpt.com)                                |       Yes       | 2026.08–2026.09 |
-| Open Problems – Multimodal Single-Cell Integration | [Kaggle](https://www.kaggle.com/competitions/open-problems-multimodal?utm_source=chatgpt.com)                |       Yes       | 2026.09         |
-| Open Problems – Single-Cell Perturbations          | [Kaggle](https://www.kaggle.com/competitions/open-problems-single-cell-perturbations?utm_source=chatgpt.com) |       Yes       | 2026.08         |
-| Sartorius – Cell Instance Segmentation             | [Kaggle](https://www.kaggle.com/competitions/sartorius-cell-instance-segmentation?utm_source=chatgpt.com)    |       Yes       | 2026.09         |
-| Xenium Imputation Benchmarking                     | [Kaggle](https://www.kaggle.com/competitions/imputation-benchmarking-xenium-fold-1?utm_source=chatgpt.com)   |       Yes       | 2026.09         |
-
+| Competition | Competition URL | My Page | Late Submission | Date |
+|---|---|---|:---:|---|
+| IMMREP25: TCR Specificity Prediction Challenge | [Kaggle](https://www.kaggle.com/competitions/immrep25) | [GitHub](https://github.com/AiJayce/Kaggle-Competetion/tree/IMMREP25-TCR-Specificity-Prediction-Challenge) | Yes | 2026.08–2026.09 |
+| Open Problems – Multimodal Single-Cell Integration | [Kaggle](https://www.kaggle.com/competitions/open-problems-multimodal) | [GitHub](https://github.com/AiJayce/Kaggle-Competetion/tree/Open-Problems-Multimodal-Single-Cell-Integration) | Yes | 2026.09 |
+| Open Problems – Single-Cell Perturbations | [Kaggle](https://www.kaggle.com/competitions/open-problems-single-cell-perturbations) | [GitHub](https://github.com/AiJayce/Kaggle-Competetion/tree/Open-Problems-Single-Cell-Perturbations) | Yes | 2026.08 |
+| Sartorius – Cell Instance Segmentation | [Kaggle](https://www.kaggle.com/competitions/sartorius-cell-instance-segmentation) | [GitHub](https://github.com/AiJayce/Kaggle-Competetion/tree/Sartorius-Cell-Instance-Segmentation) | Yes | 2026.09 |
+| Xenium Imputation Benchmarking | [Kaggle](https://www.kaggle.com/competitions/imputation-benchmarking-xenium-fold-1) | [GitHub](https://github.com/AiJayce/Kaggle-Competetion/tree/Xenium-Imputation-Benchmarking) | Yes | 2026.09 |
 
 
 
