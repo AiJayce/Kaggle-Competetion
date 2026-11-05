@@ -19,8 +19,7 @@ The table below summarizes the competitions I participated in, including the com
 | Open Problems – Single-Cell Perturbations | [Kaggle](https://www.kaggle.com/competitions/open-problems-single-cell-perturbations) | [GitHub](https://github.com/AiJayce/Kaggle-Competetion/tree/Open-Problems-Single-Cell-Perturbations) | Yes | 2026.08 |
 | Sartorius – Cell Instance Segmentation | [Kaggle](https://www.kaggle.com/competitions/sartorius-cell-instance-segmentation) | [GitHub](https://github.com/AiJayce/Kaggle-Competetion/tree/Sartorius-Cell-Instance-Segmentation) | Yes | 2026.09 |
 | Xenium Imputation Benchmarking | [Kaggle](https://www.kaggle.com/competitions/imputation-benchmarking-xenium-fold-1) | [GitHub](https://github.com/AiJayce/Kaggle-Competetion/tree/Xenium-Imputation-Benchmarking) | Yes | 2026.09 |
-
-
+| Polyp Segmentation | [Kaggle](https://www.kaggle.com/competitions/polyp-segmentation) | [GitHub](https://github.com/AiJayce/Kaggle-Competetion/tree/Polyp-segmentation) | Yes | 2026.10-2026.11 |
 
 Each Github project branch contains the executed code, generated figures, benchmark scores, comparisons with the 1st-place scores, and a summary of the project's significance and key findings.
 
