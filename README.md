@@ -118,8 +118,8 @@ The table below ranks the six models by their Kaggle Public Dice score.
 | Rank | Model | Validation Dice | Kaggle Public Dice |
 |---:|---|---:|---:|
 | - | Competetion 1st | - | **0.88956** |
-| 1 | SegFormer | 0.9241 | **0.9233** |
-| 2 | Polyp-PVT | 0.9154 | **0.8998** |
+| 1 | SegFormer | 0.9241 | **0.9233** | **<-**
+| 2 | Polyp-PVT | 0.9154 | **0.8998** | **<-**
 | 3 | HarDNet-MSEG | 0.9012 | **0.8897** |
 | 4 | PraNet | 0.9033 | **0.8812** |
 | 5 | U-Net | 0.7897 | **0.7628** |
