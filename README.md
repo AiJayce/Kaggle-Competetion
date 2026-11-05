@@ -74,7 +74,7 @@ The curves provide an early indication of which models may perform well, but tra
 
 ## (5) Qualitative Prediction Comparison
 
-![Uploading 그림4.png…]()
+<img width="1974" height="1456" alt="그림4" src="https://github.com/user-attachments/assets/2c34d4fc-76b3-4725-a890-4b9c32b78bc0" />
 
 The figure compares the ground-truth mask with predictions from each model on selected validation images. Overlay colors indicate whether each pixel was correctly or incorrectly classified:
 
@@ -117,7 +117,7 @@ The table below ranks the six models by their Kaggle Public Dice score.
 
 | Rank | Model | Validation Dice | Kaggle Public Dice |
 |---:|---|---:|---:|
-| - | Competetion 1st | - | **0.88956** |
+| - | Competetion 1st | - | **0.8895** |
 | 1 | SegFormer | 0.9241 | **0.9233** | **<-**
 | 2 | Polyp-PVT | 0.9154 | **0.8998** | **<-**
 | 3 | HarDNet-MSEG | 0.9012 | **0.8897** |
