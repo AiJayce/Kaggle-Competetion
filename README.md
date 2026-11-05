@@ -24,5 +24,6 @@ The table below summarizes the competitions I participated in, including the com
 
 Each Github project branch contains the executed code, generated figures, benchmark scores, comparisons with the 1st-place scores, and a summary of the project's significance and key findings.
 
+## Dependency
 
 The dependencies used across all projects are standardized and documented in the following [this file](https://github.com/AiJayce/Kaggle-Competetion/blob/main/DEPENDENCY.csv)
