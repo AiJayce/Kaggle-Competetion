@@ -1,107 +1,135 @@
-# Polyp Segmentation: Six-Model Benchmark
+# Polyp Segmentation Benchmark
 
-This branch contains the executed notebook, implementation, tests, dependencies,
-and Korean report for benchmarking three CNN and three Transformer segmentation
-models. All six model predictions were submitted individually and scored by Kaggle.
-These were late submissions, not an official leaderboard placement.
+## (1) Introduction
 
-## Files
+![Example colonoscopy image containing a polyp](images/figure0.png)
 
-- [Executed notebook](./Polyp_Segmentation.ipynb): training, evaluation, qualitative analysis, and validation/Public bar plots.
-- [Korean model report (PDF)](./Polyp_Segmentation_Model_Report_KO.pdf): how each model learns and infers polyp regions.
-- [Benchmark implementation](./polyp_benchmark.py): shared protocol and model factories.
-- [Notebook runner](./run_polyp_notebook.py): executes the notebook and persists outputs.
-- [Submission companion](./submit_polyp_results.py): validates artifacts and submits each model once.
-- [Report generator](./create_polyp_report.py).
-- [Dependencies](./requirements-polyp.txt).
-- [Benchmark tests](./test_polyp_benchmark.py) and [submission tests](./test_polyp_submission.py).
+1. Competition Overview
+ - Hosted by Kaggle
+ - Objective: Benchmark deep learning methods for colorectal polyp segmentation.
+ - Experimental context: Pixel-level polyp segmentation in colonoscopy images.
 
-## Experiment and results
+2. Data & Experimental Design
+Training data: Colonoscopy images with ground-truth segmentation masks.
+Test data: Colonoscopy images without segmentation masks.
+Annotation: Pixel-level masks for polyp regions and background.
+Prediction output: Pixel-wise segmentation masks.
 
-All six models were trained using image/mask pairs: **supervised segmentation**.
-DINOv2 uses a self-supervised pretrained encoder, but its segmentation fine-tuning
-in this experiment was supervised. U-Net was randomly initialized; the other
-models used general pretrained encoders. No polyp-pretrained segmentation weights
-were used.
+3. Prediction Task
+ - Identify polyp regions while accurately capturing boundaries, shapes, and spatial structures.
 
-The shared protocol used seed 42, 640 training / 160 validation images, 448 x 448
-inputs, BCE plus soft Dice loss, AdamW, effective batch size 8, and up to 50 epochs
-with early stopping. Checkpoints were selected using validation mean Dice.
-Each model predicted masks for the same 200 test images.
+4. Evaluation
+ - Mean Dice coefficient between predicted and ground-truth masks.
+ - Higher Dice scores indicate better segmentation performance.
+ - Predictions submitted in Run-Length Encoding (RLE) format.
 
-| Model | Validation Dice | Kaggle Public Dice | Kaggle Private Dice |
-|---|---:|---:|---:|
-| SegFormer | 0.92406 | 0.92330 | 0.90557 |
-| Polyp-PVT | 0.91545 | 0.89984 | 0.87426 |
-| PraNet | 0.90325 | 0.88121 | 0.87281 |
-| HarDNet-MSEG | 0.90119 | 0.88970 | 0.88675 |
-| DINOv2 + decoder | 0.79165 | 0.75549 | 0.76854 |
-| U-Net | 0.78970 | 0.76284 | 0.77643 |
+5. My Key Concept
+- Benchmark multiple CNN and Vision Transformer (ViT) architectures to compare their suitability for polyp segmentation.
 
-SegFormer was highest on validation, Public, and Private Dice in this experiment.
-This is not a controlled causal comparison of CNNs versus Transformers: model
-capacity, decoder architecture, and pretraining differ, and only one image-level
-split and seed were evaluated.
+Accurate polyp segmentation in colonoscopy images can help identify the location and extent of lesions. This project trains and compares six deep-learning models that predict a pixel-level polyp mask from an endoscopic image.
 
-[Competition](https://www.kaggle.com/competitions/polyp-segmentation) |
-[Imported Kaggle notebook](https://www.kaggle.com/code/kimkiyeont/polyp-segmentation-six-model-benchmark)
+The benchmark includes three CNN-based models—U-Net, PraNet, and HarDNet-MSEG—and three Transformer-based models—DINOv2 with a segmentation decoder, SegFormer, and Polyp-PVT. All models were evaluated using the same training/validation split and a consistent evaluation protocol. Validation metrics and Kaggle Public scores were compared to assess how well validation performance reflected submission performance.
 
-## Running and portability
+## (2) Training Data and Procedure
 
-The original files are preserved, including notebook outputs. They reference
-the author's local `scrna` environment, workspace paths, GPU 1, and external
-dataset/result directories. They are **not a self-contained Kaggle runtime**.
-Original images, downloaded upstream repositories, checkpoints, submissions,
-and standalone result files live outside the uploaded source folder and are
-not included in this branch. Obtain competition data separately and adapt the
-paths and device configuration before running elsewhere.
+![Training data and segmentation workflow](images/figure1.png)
 
-Tests that do not require the training data or external uploads:
+The training set consists of colonoscopy images paired with binary ground-truth polyp masks. Each model learns to predict which pixels belong to a polyp.
 
-```bash
-python -m unittest discover -s . -p 'test_polyp_*.py' -v
-```
+All models used the same preprocessing and training protocol:
 
-Do not treat historical notebook text saying "no uploads" as the final submission
-state: submission was later authorized and completed by the separate companion.
-The model report generator also uses external result files and a local Korean font.
+| Setting | Description |
+|---|---|
+| Data split | 640 training images and 160 validation images |
+| Input | RGB images resized to 448 × 448 |
+| Normalization | ImageNet mean and standard deviation |
+| Mask processing | Nearest-neighbor resizing followed by binary thresholding |
+| Augmentation | 90-degree rotations, horizontal and vertical flips, and brightness/contrast adjustments; training set only |
+| Loss | Binary Cross-Entropy + Soft Dice Loss |
+| Optimizer | AdamW |
+| Learning-rate schedule | Cosine scheduler |
+| Training budget | Up to 50 epochs, with early stopping |
+| Model selection | Checkpoint with the highest validation mean Dice |
 
-## Upstream code permissions
+The same split and shared training settings were used for all six models. Since architectures and pretraining differ, this benchmark compares the models under a common protocol rather than isolating architecture as the only variable.
 
-PraNet and Polyp-PVT upstream code is restricted to research/education; separate
-permission was confirmed by the user for this experiment's submissions.
-HarDNet-MSEG uses Apache-2.0. Those permissions do not automatically grant broader
-commercial use or redistribution rights. The original upstream sources are not
-vendored in this branch; verify applicable terms before downloading or reuse.
+## (3) Benchmark Model Categories
 
----
+![CNN and Transformer model categories](images/figure2.png)
 
-# Kaggle Machine Learning Competetion
+The benchmark compares two broad model groups:
 
-<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/05a51fda-fea8-4685-be29-d16347f9be48" />
+- **CNN-based:** U-Net, PraNet, and HarDNet-MSEG
+- **Transformer-based:** DINOv2 + decoder, SegFormer, and Polyp-PVT
 
-This page presents projects related to my participation in Kaggle machine learning competitions.
+These models were selected to compare different feature-extraction and segmentation approaches on the same task. DINOv2 is a pretrained encoder paired with a segmentation decoder; it is not a segmentation architecture by itself.
 
-My personal GitHub profile is available [here](https://github.com/AiJayce).
+## (4) Training Progress
 
-As Kaggle competitions specifically focused on bioinformatics are relatively limited, opportunities to participate in active competitions were somewhat restricted. For competitions that had already ended, I actively used the Late Submission feature to further develop my modeling skills in relevant domains.
+![Training progress and validation performance](images/figure3.png)
 
-Although projects submitted through Late Submission do not receive an official leaderboard ranking, I objectively evaluated model performance by comparing my results with the scores achieved by top-ranked participants. This provided an opportunity to benchmark the performance of my models against established competition results.
+The training curves show how validation Dice and training loss changed across epochs. In general, training loss decreased as learning progressed, while validation Dice increased and eventually stabilized.
 
-The table below summarizes the competitions I participated in, including the competition name, URL, whether Late Submission was used, and the submission date.
+The curves provide an early indication of which models may perform well, but training loss alone does not establish generalization performance. Final model comparisons therefore use validation metrics and Kaggle Public scores. In this experiment, SegFormer reached the strongest overall validation performance, while Polyp-PVT and PraNet also achieved high validation Dice.
 
-| Competition | Competition URL | My Page | Late Submission | Date |
-|---|---|---|:---:|---|
-| IMMREP25: TCR Specificity Prediction Challenge | [Kaggle](https://www.kaggle.com/competitions/immrep25) | [GitHub](https://github.com/AiJayce/Kaggle-Competetion/tree/IMMREP25-TCR-Specificity-Prediction-Challenge) | Yes | 2026.08–2026.09 |
-| Open Problems – Multimodal Single-Cell Integration | [Kaggle](https://www.kaggle.com/competitions/open-problems-multimodal) | [GitHub](https://github.com/AiJayce/Kaggle-Competetion/tree/Open-Problems-Multimodal-Single-Cell-Integration) | Yes | 2026.09 |
-| Open Problems – Single-Cell Perturbations | [Kaggle](https://www.kaggle.com/competitions/open-problems-single-cell-perturbations) | [GitHub](https://github.com/AiJayce/Kaggle-Competetion/tree/Open-Problems-Single-Cell-Perturbations) | Yes | 2026.08 |
-| Sartorius – Cell Instance Segmentation | [Kaggle](https://www.kaggle.com/competitions/sartorius-cell-instance-segmentation) | [GitHub](https://github.com/AiJayce/Kaggle-Competetion/tree/Sartorius-Cell-Instance-Segmentation) | Yes | 2026.09 |
-| Xenium Imputation Benchmarking | [Kaggle](https://www.kaggle.com/competitions/imputation-benchmarking-xenium-fold-1) | [GitHub](https://github.com/AiJayce/Kaggle-Competetion/tree/Xenium-Imputation-Benchmarking) | Yes | 2026.09 |
+## (5) Qualitative Prediction Comparison
 
+![Ground-truth masks and model predictions](images/figure4.png)
 
+The figure compares the ground-truth mask with predictions from each model on selected validation images. Overlay colors indicate whether each pixel was correctly or incorrectly classified:
 
-Each Github project branch contains the executed code, generated figures, benchmark scores, comparisons with the 1st-place scores, and a summary of the project's significance and key findings.
+- **Green:** True Positive — predicted as polyp and present in the ground truth
+- **Red:** False Positive — predicted as polyp but absent from the ground truth
+- **Blue:** False Negative — present in the ground truth but missed by the model
 
-## Dependency
+A larger green region and smaller red and blue regions indicate closer agreement with the ground truth. These examples also illustrate model-specific over-segmentation and missed regions. The overlays are qualitative examples and should be interpreted alongside the numerical validation metrics.
 
-The dependencies used across all projects are standardized and documented in the following [this file](https://github.com/AiJayce/Kaggle-Competetion/blob/main/DEPENDENCY.csv)
+## (6) Validation Benchmark
+
+![Validation benchmark across segmentation metrics](images/figure5.png)
+
+The 800 paired training images were split into 640 training images and 160 validation images using a fixed random seed. The validation set was not used for gradient updates; it was used for model selection and performance evaluation.
+
+| Data split | Number of images | Purpose |
+|---|---:|---|
+| Training set | 640 | Model training |
+| Validation set | 160 | Model selection and evaluation |
+| Kaggle test set | 200 | Submission scoring |
+
+Validation results are shown below. Mean Dice is averaged across images, while Global Dice is calculated by aggregating pixel-level true positives, false positives, and false negatives across the dataset. The two metrics may therefore produce different rankings.
+
+| Model | Mean Dice | Mean IoU | Precision | Recall | Boundary F1 | Global Dice |
+|---|---:|---:|---:|---:|---:|---:|
+| U-Net | 0.7897 | 0.6898 | 0.8119 | 0.8370 | 0.4816 | 0.7833 |
+| PraNet | 0.9033 | 0.8413 | 0.9160 | **0.9167** | 0.7087 | 0.8963 |
+| HarDNet-MSEG | 0.9012 | 0.8393 | 0.9236 | 0.9092 | 0.7102 | 0.8978 |
+| DINOv2 + decoder | 0.7917 | 0.6928 | 0.8168 | 0.8283 | 0.4663 | 0.8112 |
+| SegFormer | **0.9241** | **0.8755** | 0.9361 | 0.9317 | **0.7543** | **0.9268** |
+| Polyp-PVT | 0.9154 | 0.8611 | **0.9380** | 0.9145 | 0.7290 | 0.9208 |
+
+SegFormer achieved the highest Mean Dice, Mean IoU, Boundary F1, and Global Dice. Polyp-PVT had the highest precision, while PraNet had the highest recall. Overall, SegFormer produced the strongest validation results across the evaluated metrics.
+
+## (7) Final Score Benchmark
+
+![Validation Dice and Kaggle Public Dice comparison](images/figure6.png)
+
+The table below ranks the six models by their Kaggle Public Dice score.
+
+| Rank | Model | Validation Dice | Kaggle Public Dice |
+|---:|---|---:|---:|
+| 1 | SegFormer | 0.9241 | **0.9233** |
+| 2 | Polyp-PVT | 0.9154 | **0.8998** |
+| 3 | HarDNet-MSEG | 0.9012 | **0.8897** |
+| 4 | PraNet | 0.9033 | **0.8812** |
+| 5 | U-Net | 0.7897 | **0.7628** |
+| 6 | DINOv2 + decoder | 0.7917 | **0.7555** |
+
+SegFormer achieved the highest Kaggle Public score among the six evaluated models, followed by Polyp-PVT and HarDNet-MSEG. The overall ordering was broadly consistent with the validation results, although validation performance does not perfectly predict a model's score on unseen test data. These scores compare only the six models in this benchmark and do not represent the full competition leaderboard.
+
+## Discussion
+
+Under the shared data split and training protocol, SegFormer achieved the strongest overall validation and Kaggle Public results. Polyp-PVT performed best in precision, while PraNet achieved the highest recall. U-Net and DINOv2 + decoder had lower validation and Public scores in this experiment.
+
+These findings are specific to the dataset split, preprocessing, and training settings used here; they should not be assumed to hold for other datasets or experimental setups. Since metrics such as Mean Dice, Global Dice, precision, and recall capture different aspects of segmentation quality, model selection should consider the intended application as well as the overall score.
+
+For implementation and experiment details, see the [training notebook](./Polyp_Segmentation.ipynb) and [benchmark script](./polyp_benchmark.py).
