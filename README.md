@@ -2,7 +2,7 @@
 
 ## (1) Introduction
 
-![Example colonoscopy image containing a polyp](images/figure0.png)
+<img width="1627" height="1417" alt="그림0" src="https://github.com/user-attachments/assets/c85f0c16-d1b8-42db-b65f-5f60cc35f4f3" />
 
 1. Competition Overview
  - Hosted by Kaggle
@@ -32,7 +32,7 @@ The benchmark includes three CNN-based models—U-Net, PraNet, and HarDNet-MSEG�
 
 ## (2) Training Data and Procedure
 
-![Training data and segmentation workflow](images/figure1.png)
+<img width="1876" height="1555" alt="그림1" src="https://github.com/user-attachments/assets/f3080cea-1b1d-4b3e-8025-612747bd49b9" />
 
 The training set consists of colonoscopy images paired with binary ground-truth polyp masks. Each model learns to predict which pixels belong to a polyp.
 
@@ -55,7 +55,7 @@ The same split and shared training settings were used for all six models. Since 
 
 ## (3) Benchmark Model Categories
 
-![CNN and Transformer model categories](images/figure2.png)
+<img width="1393" height="1479" alt="그림2" src="https://github.com/user-attachments/assets/13278164-f6e3-4085-a076-f861b27f481e" />
 
 The benchmark compares two broad model groups:
 
@@ -66,7 +66,7 @@ These models were selected to compare different feature-extraction and segmentat
 
 ## (4) Training Progress
 
-![Training progress and validation performance](images/figure3.png)
+<img width="2612" height="819" alt="그림3" src="https://github.com/user-attachments/assets/a825c6d4-9606-4b5d-8fb9-a8684b5a2e21" />
 
 The training curves show how validation Dice and training loss changed across epochs. In general, training loss decreased as learning progressed, while validation Dice increased and eventually stabilized.
 
@@ -74,7 +74,7 @@ The curves provide an early indication of which models may perform well, but tra
 
 ## (5) Qualitative Prediction Comparison
 
-![Ground-truth masks and model predictions](images/figure4.png)
+![Uploading 그림4.png…]()
 
 The figure compares the ground-truth mask with predictions from each model on selected validation images. Overlay colors indicate whether each pixel was correctly or incorrectly classified:
 
@@ -86,7 +86,7 @@ A larger green region and smaller red and blue regions indicate closer agreement
 
 ## (6) Validation Benchmark
 
-![Validation benchmark across segmentation metrics](images/figure5.png)
+<img width="2048" height="1079" alt="그림5" src="https://github.com/user-attachments/assets/72e595d7-dc48-4d48-ab7f-27f530020c9e" />
 
 The 800 paired training images were split into 640 training images and 160 validation images using a fixed random seed. The validation set was not used for gradient updates; it was used for model selection and performance evaluation.
 
@@ -111,7 +111,7 @@ SegFormer achieved the highest Mean Dice, Mean IoU, Boundary F1, and Global Dice
 
 ## (7) Final Score Benchmark
 
-![Validation Dice and Kaggle Public Dice comparison](images/figure6.png)
+<img width="1859" height="671" alt="그림6" src="https://github.com/user-attachments/assets/25fd6cf0-fad9-4a68-8d05-0db7eb26f9f9" />
 
 The table below ranks the six models by their Kaggle Public Dice score.
 
