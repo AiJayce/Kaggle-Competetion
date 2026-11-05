@@ -1,3 +1,81 @@
+# Polyp Segmentation: Six-Model Benchmark
+
+This branch contains the executed notebook, implementation, tests, dependencies,
+and Korean report for benchmarking three CNN and three Transformer segmentation
+models. All six model predictions were submitted individually and scored by Kaggle.
+These were late submissions, not an official leaderboard placement.
+
+## Files
+
+- [Executed notebook](./Polyp_Segmentation.ipynb): training, evaluation, qualitative analysis, and validation/Public bar plots.
+- [Korean model report (PDF)](./Polyp_Segmentation_Model_Report_KO.pdf): how each model learns and infers polyp regions.
+- [Benchmark implementation](./polyp_benchmark.py): shared protocol and model factories.
+- [Notebook runner](./run_polyp_notebook.py): executes the notebook and persists outputs.
+- [Submission companion](./submit_polyp_results.py): validates artifacts and submits each model once.
+- [Report generator](./create_polyp_report.py).
+- [Dependencies](./requirements-polyp.txt).
+- [Benchmark tests](./test_polyp_benchmark.py) and [submission tests](./test_polyp_submission.py).
+
+## Experiment and results
+
+All six models were trained using image/mask pairs: **supervised segmentation**.
+DINOv2 uses a self-supervised pretrained encoder, but its segmentation fine-tuning
+in this experiment was supervised. U-Net was randomly initialized; the other
+models used general pretrained encoders. No polyp-pretrained segmentation weights
+were used.
+
+The shared protocol used seed 42, 640 training / 160 validation images, 448 x 448
+inputs, BCE plus soft Dice loss, AdamW, effective batch size 8, and up to 50 epochs
+with early stopping. Checkpoints were selected using validation mean Dice.
+Each model predicted masks for the same 200 test images.
+
+| Model | Validation Dice | Kaggle Public Dice | Kaggle Private Dice |
+|---|---:|---:|---:|
+| SegFormer | 0.92406 | 0.92330 | 0.90557 |
+| Polyp-PVT | 0.91545 | 0.89984 | 0.87426 |
+| PraNet | 0.90325 | 0.88121 | 0.87281 |
+| HarDNet-MSEG | 0.90119 | 0.88970 | 0.88675 |
+| DINOv2 + decoder | 0.79165 | 0.75549 | 0.76854 |
+| U-Net | 0.78970 | 0.76284 | 0.77643 |
+
+SegFormer was highest on validation, Public, and Private Dice in this experiment.
+This is not a controlled causal comparison of CNNs versus Transformers: model
+capacity, decoder architecture, and pretraining differ, and only one image-level
+split and seed were evaluated.
+
+[Competition](https://www.kaggle.com/competitions/polyp-segmentation) |
+[Imported Kaggle notebook](https://www.kaggle.com/code/kimkiyeont/polyp-segmentation-six-model-benchmark)
+
+## Running and portability
+
+The original files are preserved, including notebook outputs. They reference
+the author's local `scrna` environment, workspace paths, GPU 1, and external
+dataset/result directories. They are **not a self-contained Kaggle runtime**.
+Original images, downloaded upstream repositories, checkpoints, submissions,
+and standalone result files live outside the uploaded source folder and are
+not included in this branch. Obtain competition data separately and adapt the
+paths and device configuration before running elsewhere.
+
+Tests that do not require the training data or external uploads:
+
+```bash
+python -m unittest discover -s . -p 'test_polyp_*.py' -v
+```
+
+Do not treat historical notebook text saying "no uploads" as the final submission
+state: submission was later authorized and completed by the separate companion.
+The model report generator also uses external result files and a local Korean font.
+
+## Upstream code permissions
+
+PraNet and Polyp-PVT upstream code is restricted to research/education; separate
+permission was confirmed by the user for this experiment's submissions.
+HarDNet-MSEG uses Apache-2.0. Those permissions do not automatically grant broader
+commercial use or redistribution rights. The original upstream sources are not
+vendored in this branch; verify applicable terms before downloading or reuse.
+
+---
+
 # Kaggle Machine Learning Competetion
 
 <img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/05a51fda-fea8-4685-be29-d16347f9be48" />
