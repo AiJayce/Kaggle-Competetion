@@ -117,6 +117,7 @@ The table below ranks the six models by their Kaggle Public Dice score.
 
 | Rank | Model | Validation Dice | Kaggle Public Dice |
 |---:|---|---:|---:|
+| - | Competetion 1st | - | **0.88956** |
 | 1 | SegFormer | 0.9241 | **0.9233** |
 | 2 | Polyp-PVT | 0.9154 | **0.8998** |
 | 3 | HarDNet-MSEG | 0.9012 | **0.8897** |
@@ -124,7 +125,8 @@ The table below ranks the six models by their Kaggle Public Dice score.
 | 5 | U-Net | 0.7897 | **0.7628** |
 | 6 | DINOv2 + decoder | 0.7917 | **0.7555** |
 
-SegFormer achieved the highest Kaggle Public score among the six evaluated models, followed by Polyp-PVT and HarDNet-MSEG. The overall ordering was broadly consistent with the validation results, although validation performance does not perfectly predict a model's score on unseen test data. These scores compare only the six models in this benchmark and do not represent the full competition leaderboard.
+SegFormer achieved the highest Kaggle Public score among the six evaluated models, followed by Polyp-PVT and HarDNet-MSEG. The overall ordering was broadly consistent with the validation results, although validation performance does not perfectly predict a model's score on unseen test data. 
+At the time of comparison, SegFormer and Polyp-PVT scored higher than the competition’s first-place score, while HarDNet-MSEG scored slightly higher. These results highlight several promising models for polyp segmentation, with SegFormer achieving the strongest score in this benchmark.
 
 ## Discussion
 
